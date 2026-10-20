@@ -74,10 +74,13 @@ guide's plugin layout without requiring the newer Agent Plugins schema.
 No MCP servers, hooks, or external-service authentication are added by this
 sample plugin.
 
-These desktop URI routes were verified against the supplied authenticated
-guide and the app's internal URL contract, not a public GitHub Docs promise.
-Do not assume that other Copilot clients support them. The public documentation
-below covers manifests, marketplaces, CLI commands, and Pages.
+Both routes are documented in
+[Using deep links to open the GitHub Copilot app](https://docs.github.com/en/copilot/how-tos/github-copilot-app/open-with-deep-links#plugin-parameters),
+which states that they do not install a plugin or add a marketplace until the
+user confirms in the app. The same page documents an HTTPS launcher,
+`https://github.com/copilot/app/launch?open=<encoded ghapp:// link>`, which
+shows a fallback page when the browser cannot hand off to the app. These routes
+are for the desktop app; other Copilot clients use the CLI commands below.
 
 ### Terminal fallback
 
@@ -157,6 +160,10 @@ them.
 
 Public documentation (retrieved October 20, 2026):
 
+- [Using deep links to open the GitHub Copilot app](https://docs.github.com/en/copilot/how-tos/github-copilot-app/open-with-deep-links#plugin-parameters):
+  `ghapp://plugins/marketplace/add` and `ghapp://plugins/install`, the
+  confirmation requirement, and the HTTPS launcher.
+- [Customizing the app: adding plugins](https://docs.github.com/en/copilot/how-tos/github-copilot-app/customize-github-copilot-app#adding-plugins).
 - [Creating a Copilot plugin](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating):
   manifest formats, skills, local testing, and cached installs.
 - [Creating a plugin marketplace](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-marketplace):
@@ -168,7 +175,7 @@ Public documentation (retrieved October 20, 2026):
 - [Pages access control](https://docs.github.com/en/enterprise-cloud@latest/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site):
   private sites, read-access requirements, and assigned private hostnames.
 
-Internal-only evidence, available to authorized readers:
+Supporting internal evidence, available to authorized readers:
 
 - `github/revenue-agent-skills: docs/getting-started.md`, sections 1-2:
   app download and marketplace button, followed by separate plugin installation.
@@ -178,9 +185,9 @@ Internal-only evidence, available to authorized readers:
   `callbacks/addMarketplace.ts`: trust confirmation and pre-filled forms,
   rather than silent installation.
 
-**Research confidence: Medium — Partially sourced.** Packaging and CLI behavior
-are publicly documented; the desktop deep-link contract is internal-only and
-can depend on the installed app version.
+**Research confidence: High — Fully sourced.** Packaging, CLI behavior, and
+the desktop deep-link routes are publicly documented. Exact dialog wording can
+vary with the installed app version.
 
 ## Contributing
 
