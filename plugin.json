@@ -1,0 +1,10 @@
+{
+  "name": "architgargg-test-plugin",
+  "description": "All skills in the Skill Library, including a read-only installation smoke test.",
+  "version": "1.0.0",
+  "author": {
+    "name": "architgargg-demo-org"
+  },
+  "repository": "https://github.com/architgargg-demo-org/skill-library",
+  "skills": ["./skills/"]
+}
