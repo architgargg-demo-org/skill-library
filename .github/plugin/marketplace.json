@@ -1,0 +1,18 @@
+{
+  "name": "architgargg-skill-library",
+  "owner": {
+    "name": "architgargg-demo-org"
+  },
+  "metadata": {
+    "description": "Reviewed skills from the Skill Library.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "architgargg-test-plugin",
+      "description": "Install every skill in the Skill Library as one plugin.",
+      "version": "1.0.0",
+      "source": "./"
+    }
+  ]
+}

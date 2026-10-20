@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Install the Skill Library plugin in the GitHub Copilot app.">
+    <title>Skill Library | GitHub Copilot plugin</title>
+    <style>
+      :root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.6; }
+      body { max-width: 54rem; margin: 3rem auto; padding: 0 1.25rem 3rem; }
+      h1, h2 { line-height: 1.2; }
+      a { color: light-dark(#0969da, #79c0ff); }
+      a:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+      .button { display: inline-block; padding: .7rem 1rem; border-radius: .5rem; background: light-dark(#0969da, #79c0ff); color: light-dark(white, #0d1117); font-weight: 600; text-decoration: none; }
+      .notice { padding: 1rem; border: 1px solid light-dark(#8c959f, #8b949e); border-radius: .5rem; }
+      code { overflow-wrap: anywhere; }
+      pre { padding: 1rem; background: light-dark(#f6f8fa, #161b22); border-radius: .5rem; overflow-x: auto; }
+      li { margin-block: .5rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p>GitHub Copilot app / Skill Library</p>
+      <h1>One plugin. Every library skill.</h1>
+      <p><strong>architgargg-test-plugin</strong> packages the repository's entire
+        <code>skills/</code> directory. No separate skill downloads are needed.</p>
+      <p class="notice">These links open the installed desktop app; they do not install
+        the app itself or silently install a plugin. Review the confirmation and
+        submit the pre-filled form in the app. Add the marketplace before installing
+        the plugin. Only install sources you trust.</p>
+
+      <h2>1. Install and sign in to the app</h2>
+      <p><a href="https://gh.io/app">Download the GitHub Copilot app</a>, install it,
+        open it, and sign in with a GitHub account that can read
+        <a href="https://github.com/architgargg-demo-org/skill-library">this repository</a>.
+        Update an existing app installation first. This repository is internal;
+        access to this page does not grant access to its plugin source.</p>
+
+      <h2>2. Add the marketplace</h2>
+      <p><a class="button" id="add-marketplace" href="ghapp://plugins/marketplace/add?source=architgargg-demo-org%2Fskill-library">Add marketplace in Copilot</a></p>
+      <p>If your browser asks, allow this link to open GitHub Copilot. Review the
+        source, accept the app's confirmation, then submit the add-marketplace form.
+        The registered marketplace is named <code>architgargg-skill-library</code>.</p>
+
+      <h2>3. Install the plugin</h2>
+      <p><a class="button" id="install-plugin" href="ghapp://plugins/install?source=architgargg-test-plugin%40architgargg-skill-library">Install plugin in Copilot</a></p>
+      <p>Review the confirmation, then click <strong>Install</strong> in the
+        pre-filled form. You can also find <code>architgargg-test-plugin</code>
+        in the app's plugin-management screen and install it there. Depending on
+        your app version, this screen is under Settings &gt; Plugins or Customize.</p>
+
+      <h2>4. Check the installation</h2>
+      <p>Start a new Copilot session and ask:</p>
+      <pre><code>Run the skill library smoke test.</code></pre>
+      <p>Expected response:</p>
+      <pre><code>Skill Library smoke test passed: architgargg-test-plugin loaded this skill.</code></pre>
+      <p>Also verify that <code>skill-library-smoke-test</code> appears in the app's
+        available skills. A matching response alone is not proof that a skill loaded.
+        The sample skill has no external services, credentials, hooks, or MCP servers.
+        Future skills can have their own dependencies; review their instructions.</p>
+
+      <h2>Terminal fallback</h2>
+      <p>With GitHub Copilot CLI installed and authenticated, run:</p>
+      <pre><code>copilot plugin marketplace add architgargg-demo-org/skill-library
+copilot plugin install architgargg-test-plugin@architgargg-skill-library
+copilot plugin list
+copilot skill list</code></pre>
+      <p>In an interactive CLI session, <code>/skills list</code> also lists the skills.</p>
+
+      <h2>If a link does not work</h2>
+      <ul>
+        <li>No app opens: install or update the desktop app, or use the terminal fallback.
+          GitHub Pages only serves this page; the operating system handles <code>ghapp://</code>.</li>
+        <li>Marketplace not found: finish step 2 first, and confirm that the plugin
+          manifests have been merged into the repository's default branch.</li>
+        <li>Repository access denied: check your GitHub sign-in and organization
+          authorization, including SSO if required. Pages and repository authentication
+          are separate.</li>
+        <li>Missing new skills: refresh the marketplace, update the installed plugin
+          in the app, and start a new session. CLI equivalents:
+          <code>copilot plugin marketplace update architgargg-skill-library</code>
+          and <code>copilot plugin update architgargg-test-plugin@architgargg-skill-library</code>.</li>
+      </ul>
+
+      <h2>How this is built</h2>
+      <p>The marketplace catalog is <code>.github/plugin/marketplace.json</code>.
+        Its plugin source is the repository root, where <code>plugin.json</code>
+        includes <code>./skills/</code>. Maintainer-reviewed skills added there
+        ship together when users update the plugin. No duplicate skill directory,
+        installation script, token in a URL, or automatic redirect is needed.</p>
+      <p>See the repository's <a href="https://github.com/architgargg-demo-org/skill-library#publishing-the-install-page">publishing instructions</a>
+        for Pages setup and the exact link format.</p>
+
+      <h2>Public documentation</h2>
+      <ul>
+        <li><a href="https://docs.github.com/en/copilot/how-tos/github-copilot-app/open-with-deep-links#plugin-parameters">Using deep links to open the GitHub Copilot app</a></li>
+        <li><a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating">Creating a Copilot plugin</a></li>
+        <li><a href="https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-marketplace">Creating a plugin marketplace</a></li>
+        <li><a href="https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference">Plugin manifest and CLI reference</a></li>
+        <li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">Publishing a GitHub Pages site</a></li>
+      </ul>
+      <p>The <code>ghapp://</code> plugin routes are documented for the desktop
+        app and act only after you confirm in the app. If your app version does
+        not handle them, use the CLI commands above.</p>
+    </main>
+  </body>
+</html>
