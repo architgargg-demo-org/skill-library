@@ -30,9 +30,9 @@ not included until their pull requests are reviewed and merged.
 ### Desktop app
 
 1. [Download the GitHub Copilot app](https://gh.io/app), install or update it,
-   and sign in with an account that can read this internal repository.
-2. Open the published install page from **Settings > Pages > Visit site** in
-   this repository. Publish it using the steps below first.
+   and sign in.
+2. Open the install page at
+   <https://architgargg-demo-org.github.io/skill-library/>.
 3. Click **Add marketplace in Copilot**, allow the browser to open the app,
    review the app's confirmation, and submit the pre-filled add form.
 4. Return to the page and click **Install plugin in Copilot**. Review the
@@ -92,33 +92,23 @@ copilot skill list
 ```
 
 You can also use `/skills list` in an interactive CLI session.
-Private/internal repository access and any required organization SSO must be
-authorized separately from access to the Pages website.
 
 ## Publishing the install page
 
-Private GitHub Pages is configured for this repository with GitHub Actions at
-<https://turbo-adventure-1gkm9w5.pages.github.io/>. The first deployment still
-requires this change to be reviewed and merged; a configured hostname does
-not mean the page or default-branch plugin catalog is already published.
+The install page is published with GitHub Actions at
+<https://architgargg-demo-org.github.io/skill-library/>.
 
-1. Review and merge this change into `main`. The install links use the default
-   branch, so they cannot find an unmerged catalog on a feature branch.
-2. In **Settings > Pages**, set **Build and deployment > Source** to
-   **GitHub Actions**. For this internal repository, keep the site **private**
-   unless a maintainer explicitly decides to publish it publicly. Pages access
-   control for private/internal repositories requires GitHub Enterprise Cloud.
-   Do not make the repository public just to enable Pages.
-3. Review the `github-pages` environment's deployment branch rules and any
-   required approvals; allow deployments from `main`.
-4. Run **Actions > Validate plugin and deploy Pages > Run workflow** on `main`
-   if the merge's workflow ran before Pages was enabled. Future pushes to
-   `main` validate the plugin and deploy automatically.
-5. When deployment succeeds, copy **Visit site** from **Settings > Pages** or
-   the workflow's deployment URL. Private Pages uses a GitHub-assigned
-   `*.pages.github.io` hostname, so do not guess a public `github.io` address.
-6. Share that URL with people who can read this repository. The page has the
-   app download link, both app buttons, terminal fallbacks, and troubleshooting.
+1. In **Settings > Pages**, keep **Build and deployment > Source** set to
+   **GitHub Actions**.
+2. The `github-pages` environment allows deployments from `main` only. Every
+   push to `main` validates the plugin and redeploys the page; you can also
+   run **Actions > Validate plugin and deploy Pages > Run workflow** on `main`.
+3. The install links read the marketplace catalog from the default branch,
+   so plugin changes take effect only after they are merged into `main`.
+4. If the repository's visibility changes, the Pages URL changes too: public
+   repositories use `https://<owner>.github.io/<repo>/`, while private Pages
+   sites use a GitHub-assigned `*.pages.github.io` hostname. Copy the current
+   URL from **Settings > Pages > Visit site** rather than reusing an old link.
 
 The workflow publishes **only `docs/`**, not the skills or the whole repository.
 Pull requests run validation without deploying. The page is static HTML: no
